@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspired Webpage</title>
+    <style>
+        :root {
+            --colorWhite: #fff;
+            --colorNeutralCool: #f3f1e7;
+            --colorGreenStarbucks: #1e3932;
+            --colorlightGreenStarbucks: #00704A;
+            --colorBlack: #000;
+            --colorTextBackground: #d4e9e2;
+            --textSize2: 1.4rem;
+            --lineHeightNormal: 1.5;
+            --space-3: 1.6rem;
+            --space-6: 4rem;
+            --space-5: 0.6rem;
+        }
+
+        body {
+            margin: 0;
+            font-family: SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+            background-color: var(--colorWhite);
+            color: var(--colorBlack);
+            font-size: var(--textSize2);
+            line-height: var(--lineHeightNormal);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-5) var(--space-6);
+            background-color: var(--colorGreenStarbucks);
+            color: var(--colorWhite);
+            position: relative;
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            height: 75px;
+            width: auto;
+        }
+        
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--space-3);
+        }
+
+        nav ul li a {
+            color: var(--colorWhite);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Base styles for menu toggle button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--colorWhite);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Base styles for navigation */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--space-3);
+        }
+
+        nav ul li a {
+            color: var(--colorWhite);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Active menu state */
+            nav.active {
+                display: block !important;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(30, 57, 50, 0.8); /* Reduced opacity here */
+                backdrop-filter: blur(4px); /* Reduced blur */
+                -webkit-backdrop-filter: blur(4px);
+                animation: slideDown 0.3s ease-out;
+                z-index: 999;
+            }
+
+            nav.active ul {
+                flex-direction: column;
+                padding: 20px 0;
+            }
+
+            nav.active ul li {
+                margin: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav.active ul li:last-child {
+                border-bottom: none;
+            }
+
+            nav.active ul li a {
+                display: block;
+                padding: 15px 20px;
+                transition: background-color 0.3s ease;
+                color: white; /* Ensuring text remains visible */
+            }
+
+            nav.active ul li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* Hamburger menu animation */
+            .menu-toggle div.active:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle div.active:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle div.active:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        /* Slide down animation */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            background-image: url('https://nakiamo.github.io/experiment-1/assets/images/starbucks-1.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--colorWhite);
+            font-size: 3.6rem;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: var(--space-6);
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 2.8rem;
+            color: var(--colorGreenStarbucks);
+        }
+
+        .content p {
+            font-size: 1.6rem;
+            margin: 2rem 0;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+            padding: 0;
+        }
+
+        .column {
+            display: flex;
+            align-items: stretch;
+            background-color: var(--colorNeutralCool);
+            border-radius: 12px;
+            overflow: hidden;
+            flex-direction: column;
+            margin: 0;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .columns {
+                grid-template-columns: 1fr;
+                padding: var(--space-6);
+            }
+
+            .column {
+                flex-direction: row;
+            }
+
+            .column img {
+                flex: 1;
+                width: 100%;
+                max-width: 50%;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .column .text {
+                flex: 1;
+                max-width: 50%;
+                padding: var(--space-3);
+                background-color: var(--colorTextBackground);
+                color: var(--colorBlack);
+                box-sizing: border-box;
+            }
+        }
+
+        .column img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .column .text {
+            width: 100%;
+            padding: var(--space-3);
+            background-color: var(--colorTextBackground);
+            color: var(--colorBlack);
+            box-sizing: border-box;
+        }
+
+        .column .text h2 {
+            margin: 0 0 10px;
+            font-size: 2rem;
+            color: var(--colorGreenStarbucks);
+        }
+
+        .column .text p {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .footer {
+            background-color: var(--colorBlack);
+            color: var(--colorWhite);
+            padding: var(--space-6);
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--colorGreenStarbucks);
+            text-decoration: none;
+        }
+        
+
+        /* Modified Cookie Consent Styles - GDPR-focused design */
+        #cookie-consent-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;  /* Use viewport height */
+            background-color: rgba(0, 0, 0, 0.3); /* This line creates the dark overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;  /* Ensure it's above all other content */
+            font-family: Arial, sans-serif;
+        }
+
+        #cookie-consent-box {
+            position: relative;  /* Add relative positioning */
+            background-color: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 550px;
+            width: 90%;
+            max-height: 90vh;  /* Limit height */
+            overflow-y: auto;  /* Add scroll if content is too long */
+            color: #333;
+            border: 1px solid #dee2e6;
+            margin: 20px;  /* Add margin to ensure it doesn't touch screen edges */
+        }
+
+        #cookie-consent-box h2 {
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+        }
+
+        #cookie-consent-box p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #4a4a4a;
+        }
+
+        #cookie-consent-box button {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            margin: 0.5rem 0.8rem 0.5rem 0;
+            background-color: #f8f9fa;
+            color: #4a4a4a;
+            border: 1px solid #dee2e6;
+        }
+
+        #cookie-consent-box button:hover {
+            background-color: #e9ecef;
+        }
+
+        #preference-options {
+            display: none;
+            margin-top: 1.5rem;
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+        }
+
+        .cookie-category {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cookie-category:last-child {
+            border-bottom: none;
+        }
+
+        .cookie-category label {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cookie-category input[type="checkbox"] {
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .cookie-description {
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        #save-preferences {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .starbucks-text {
+            font-family: Arial, sans-serif;
+            color: #4a4a4a;
+            font-weight: normal;
+            text-transform: none;
+        }
+
+        /* Make sure buttons are properly spaced and aligned */
+        #cookie-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        #cookie-buttons button {
+            margin: 0;  /* Remove default margin */
+            flex: 1 1 auto;  /* Allow buttons to grow and shrink */
+            min-width: 150px;  /* Minimum width for buttons */
+            text-align: center;
+        }
+
+        #save-preferences {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Fade animation */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #cookie-consent-box {
+                margin: 10px;
+                padding: 1.5rem;
+                max-height: 80vh;
+            }
+
+            #cookie-buttons button {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+
+
+    </style>
+</head>
+<div id="cookie-consent-banner">
+    <div id="cookie-consent-box">
+        <h2>Çerez İzin Tercihleri</h2>
+        <div id="preference-options">
+            <div class="cookie-category">
+                <label>
+                    <input type="checkbox" id="strictly-necessary-cookies" checked disabled>
+                    Kesinlikle Gerekli Çerezler
+                </label>
+                <p class="cookie-description">
+                    Bu çerezler, web sitesinin düzgün çalışması için gereklidir ve devre dışı bırakılamaz. Sayfa gezinme, güvenli alanlara erişim ve alışveriş sepeti işlevselliği gibi temel işlevleri sağlarlar. Bu çerezler olmadan web sitesi düzgün çalışamaz.
+                </p>
+            </div>
+            <div class="cookie-category">
+                <label>
+                    <input type="checkbox" id="performance-cookies">
+                    Performans Çerezleri
+                </label>
+                <p class="cookie-description">
+                    Bu çerezler, ziyaretçilerin web sitemizi nasıl kullandığına dair anonim bilgiler toplar. En popüler sayfaları, ziyaretçilerin nereden geldiğini ve site içinde nasıl hareket ettiklerini anlamamıza yardımcı olur. Toplanan tüm bilgiler anonim ve toplu halde değerlendirilir. Bu çerezler, web sitesinin performansını iyileştirmemize yardımcı olur.
+                </p>
+            </div>
+            <div class="cookie-category">
+                <label>
+                    <input type="checkbox" id="targeting-cookies">
+                    Hedefleme Çerezleri
+                </label>
+                <p class="cookie-description">
+                    Bu çerezler, ilgi alanlarınıza ve size daha uygun reklamlar sunmak için kullanılır. Ayrıca, aynı reklamı görme sıklığınızı sınırlamak ve reklam kampanyalarının etkinliğini ölçmeye yardımcı olmak için de kullanılır. Bir web sitesini ziyaret ettiğinizi hatırlarlar ve bu bilgi, reklam verenler gibi diğer kuruluşlarla paylaşılabilir.
+                </p>
+            </div>
+            <button id="save-preferences">Tercihleri Kaydet</button>
+        </div>
+        <p id="cookie-options-text">Bu site verimli bir şekilde gezinmenize ve belirli işlevleri gerçekleştirmenize yardımcı olmak için çerezleri kullanmaktadır. Aşağıda her izin kategorisi altında tüm çerezler hakkında ayrıntılı bilgi bulacaksınız. "Kesinlikle Gerekli" olarak sınıflandırılan çerezler, sitenin temel işlevlerinin etkinleştirilmesi için gerekli olduklarından tarayıcınızda saklanır.</p>
+        <div id="cookie-buttons">
+            <button id="accept-cookies">Tümünü Kabul Et</button>
+            <button id="reject-cookies">Tümünü Reddet</button>
+            <button id="manage-preferences">Tercihleri Yönet</button>
+        </div>
+    </div>
+</div>
+
+    <header>
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/sco/d/d3/Starbucks_Corporation_Logo_2011.svg" alt="Starbucks Logo">
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="#">Kahveler</a></li>
+                <li><a href="#">Mağazalar</a></li>
+                <li><a href="#">Hakkımızda</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        
+    </div>
+
+    <div class="content">
+        <h1>Baharın Taze Lezzetlerini Keşfedin</h1>
+        <p>Starbucks’ta bahar mevsimini meyve aromalarının taptaze enerjisiyle karşılayın. Serinletici içecekler, hafif tatlar ve canlı renklerle dolu yepyeni bir menü sizi bekliyor. Güneşin iç ısıtan havasına eşlik edecek her yudumda baharın ferahlığını hissedin!</p>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <img src="https://about.starbucks.com/uploads/2025/02/Starbucks-Blackberry-Sage-Refresher-2.jpg" alt="Blackberry Freshers">
+            <div class="text">
+                <h2>Blackberry & Adaçayı Ferahlığı</h2>
+                <p>Tatlı böğürtlen aromaları ve adaçayının ferahlatıcı aroması, gerçek böğürtlen parçalarıyla bir araya geldi. Dilerseniz sade olarak, limonatayla ya da hindistan cevizi sütüyle tercih edebilirsiniz. Günün her anında içinizi serinletecek, meyvemsi ve hafif bir lezzet!</p>
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://nakiamo.github.io/experiment-1/assets/images/starbucks-for-life-spring.jpg" alt="Rewards Details">
+            <div class="text">
+                <h2>Starbucks'tan Hediye Fikirleri</h2>
+                <p>Bu bahar, sevdiklerinize Starbucks’ın özel tasarım kupaları, termosları ve kahve hediye setleriyle sıcak bir sürpriz yapın. Hediye seçeneklerimizi keşfedin ve arkadaşlarınızı mutlu edin!</p>
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://nakiamo.github.io/experiment-1/assets/images/starbucks-new-tastes.jpg" alt="New Tastes">
+            <div class="text">
+                <h2>Yeni Tatlar ve Özel Tasarımlar</h2>
+                <p>Starbucks’ın bahara özel hazırladığı yepyeni tatlarla tanışmaya hazır mısınız? Özel kahve tarifleri ve şık tasarımlı bardaklarımızla bu sezonu unutulmaz kılıyoruz. Şimdi deneyin!</p>
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://nakiamo.github.io/experiment-1/assets/images/starbucks-giftcard.jpg" alt="Gift Card">
+            <div class="text">
+                <h2>Starbucks Hediye Kartı ve Mobil Uygulama</h2>
+                <p>Sevdiklerinize bahar mevsiminin renkli lezzetlerini hediye edin! Starbucks Hediye Kartı ile onları mutlu edebilirsiniz. Ayrıca mobil uygulamamızla siparişlerinizi kolayca verin, ödül puanlar kazanın ve bahar keyfini hızla yaşayın.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Good Things Happen When We Get Together . All rights reserved. <a href="#">Privacy Policy</a></p>
+    </footer>
+
+<script>document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.getElementById("menu-toggle");
+    const nav = document.getElementById("nav");
+    
+    // Toggle menu when hamburger icon is clicked
+    menuToggle.addEventListener("click", function() {
+        nav.classList.toggle("active");
+        
+        // Optional: Add animation to hamburger icon
+        const bars = menuToggle.getElementsByTagName("div");
+        for (let bar of bars) {
+            bar.classList.toggle("active");
+        }
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener("click", function(event) {
+        const isClickInsideMenu = nav.contains(event.target);
+        const isClickOnToggle = menuToggle.contains(event.target);
+        
+        if (!isClickInsideMenu && !isClickOnToggle && nav.classList.contains("active")) {
+            nav.classList.remove("active");
+            
+            // Optional: Reset hamburger icon
+            const bars = menuToggle.getElementsByTagName("div");
+            for (let bar of bars) {
+                bar.classList.remove("active");
+            }
+        }
+    });
+    
+    // Close menu when window is resized above mobile breakpoint
+    window.addEventListener("resize", function() {
+        if (window.innerWidth > 768 && nav.classList.contains("active")) {
+            nav.classList.remove("active");
+            
+            // Optional: Reset hamburger icon
+            const bars = menuToggle.getElementsByTagName("div");
+            for (let bar of bars) {
+                bar.classList.remove("active");
+            }
+        }
+    });
+});
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // NEW: Add time tracking variables
+    const startTime = Date.now();
+    let firstClickTime = null;
+    
+    const cookieConsentBanner = document.getElementById("cookie-consent-banner");
+    const acceptCookiesButton = document.getElementById("accept-cookies");
+    const rejectCookiesButton = document.getElementById("reject-cookies");
+    const managePreferencesButton = document.getElementById("manage-preferences");
+    const savePreferencesButton = document.getElementById("save-preferences");
+    const cookieOptionsText = document.getElementById("cookie-options-text");
+    const cookieButtons = document.getElementById("cookie-buttons");
+    const preferenceOptions = document.getElementById("preference-options");
+
+    // NEW: Add function to record first click time
+    function recordFirstClick() {
+    if (!firstClickTime) {
+        firstClickTime = Date.now();
+        const timeToFirstClick = firstClickTime - startTime;
+        
+        // Only use postMessage method
+        window.parent.postMessage({
+            action: 'setTimeToFirstClick',
+            time: timeToFirstClick
+        }, '*');
+        console.log('recordFirstClick - time:', timeToFirstClick);
+    }
+}
+    
+    
+    // Function to send data to Qualtrics using multiple methods
+    function sendToQualtrics(choice) {
+        // Method 1: Direct parent window communication
+        if (window.parent) {
+            try {
+                window.parent.postMessage({
+                    action: 'setCookieChoice',
+                    choice: choice
+                }, '*');
+                console.log('Sent choice via postMessage:', choice);
+            } catch (error) {
+                console.error('Error sending via postMessage:', error);
+            }
+        }
+
+        // Method 2: URL Parameter Update
+        try {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('cookieChoice', choice);
+            window.history.replaceState({}, '', currentUrl);
+            console.log('Updated URL with choice:', choice);
+        } catch (error) {
+            console.error('Error updating URL:', error);
+        }
+
+        // Method 3: Local Storage (as backup)
+        try {
+            localStorage.setItem('cookieChoice', choice);
+            console.log('Saved choice to localStorage:', choice);
+        } catch (error) {
+            console.error('Error saving to localStorage:', error);
+        }
+    }
+
+    // Function to hide the banner
+    function hideBanner() {
+        cookieConsentBanner.classList.add('fade-out');
+        setTimeout(() => {
+            cookieConsentBanner.style.display = 'none';
+        }, 1000);
+    }
+
+    // Event Listeners for the buttons
+    acceptCookiesButton.addEventListener('click', () => {
+        recordFirstClick();  // NEW LINE
+        sendToQualtrics('Accept');
+        hideBanner();
+    });
+
+    rejectCookiesButton.addEventListener('click', () => {
+        recordFirstClick();  // NEW LINE
+        sendToQualtrics('Reject');
+        hideBanner();
+    });
+
+    managePreferencesButton.addEventListener('click', () => {
+        recordFirstClick();  // NEW LINE
+        cookieOptionsText.style.display = "none";
+        cookieButtons.style.display = "none";
+        preferenceOptions.style.display = "block";
+    });
+
+    // Handle saving preferences
+    savePreferencesButton.addEventListener('click', () => {
+        // Get the state of preference checkboxes
+        const performanceCookies = document.getElementById('performance-cookies').checked;
+        const targetingCookies = document.getElementById('targeting-cookies').checked;
+        
+        // Create a detailed preferences string
+        let preferences = [];
+        if (performanceCookies) preferences.push("Performance");
+        // Always include Strictly as it's mandatory
+        preferences.push("Strictly");
+        if (targetingCookies) preferences.push("Targeting");
+        
+        // Send the preferences to Qualtrics
+        const choiceString = preferences.length > 0 ? preferences.join(", ") : "None";
+        sendToQualtrics(choiceString);
+        
+        // Hide the banner
+        hideBanner();
+    });
+});
+</script>
+
+</body>
+</html>
